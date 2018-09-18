@@ -1,0 +1,25 @@
+{
+  "name": "clovnrian/money-bridge",
+  "description": "Repository for download products, stock, etc. from Money S4",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Miroslav Babjak",
+      "email": "clovnrian@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Clovnrian\\MoneyBridge\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.0",
+    "dibi/dibi": "^4.0.1"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.13.0",
+    "phpstan/phpstan": "^0.10.3"
+  }
+}
