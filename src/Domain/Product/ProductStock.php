@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Clovnrian\MoneyBridge\Domain\Product;
 
-final class ProductCategory
+final class ProductStock
 {
     /** @var string */
     private $id;
@@ -11,22 +11,22 @@ final class ProductCategory
     /** @var string */
     private $name;
 
-    /** @var string|null */
-    private $parentCategoryId;
+    /** @var int */
+    private $quantity;
 
     public static function fromMoney(array $data): self
     {
         return new self(
-            $data['Kategorie_ID'],
+            $data['Sklad_ID'],
             $data['Nazev'],
-            $data['NadrazenaKategorie_ID']
+            $data['DostupneMnozstvi']
         );
     }
 
-    private function __construct(string $id, string $name, string $parentCategoryId = null)
+    private function __construct(string $id, string $name, int $quantity)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->parentCategoryId = $parentCategoryId;
+        $this->quantity = $quantity;
     }
 }
