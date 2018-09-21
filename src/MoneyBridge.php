@@ -13,6 +13,11 @@ final class MoneyBridge implements IMoneyBridge
     /** @var ProductRepository */
     private $repository;
 
+    public function __construct(ProductRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function getAllProducts(int $limit = 200, $offset = 0): ProductCollection
     {
         $productCollection = $this->repository->find($limit, $offset);

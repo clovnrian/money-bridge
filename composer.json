@@ -16,7 +16,7 @@
   },
   "require": {
     "php": "^7.0",
-    "dibi/dibi": "^4.0.1"
+    "dibi/dibi": "^3.2.3"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.13.0",

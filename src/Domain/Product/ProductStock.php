@@ -19,7 +19,7 @@ final class ProductStock
         return new self(
             $data['Sklad_ID'],
             $data['Nazev'],
-            $data['DostupneMnozstvi']
+            intval($data['DostupneMnozstvi'])
         );
     }
 

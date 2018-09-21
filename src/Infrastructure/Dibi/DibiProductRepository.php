@@ -9,6 +9,7 @@ use Clovnrian\MoneyBridge\Domain\Product\ProductCollection;
 use Clovnrian\MoneyBridge\Domain\Product\ProductRepository;
 use Clovnrian\MoneyBridge\Domain\Product\ProductStock;
 use Dibi\Connection;
+use Dibi\Row;
 
 final class DibiProductRepository implements ProductRepository
 {
@@ -41,12 +42,11 @@ final class DibiProductRepository implements ProductRepository
             ->where('EXISTS (SELECT 1 FROM CSW_EObchod_ArtiklKategorie WHERE Parent_ID = a.ID)')
             ->where('EXISTS (SELECT 1 FROM CSW_EObchod_PolozkaCeniku WHERE Artikl_ID = a.ID)')
             ->where('EXISTS (SELECT 1 FROM CSW_EObchod_Zasoba WHERE Artikl_ID = a.ID)')
-            ->orderBy('a.ID')
             ->fetchAll($offset, $limit);
 
         return new ProductCollection(
-            array_map(
-                function(array $product) { return Product::fromMoney($product); },
+            ...array_map(
+                function(Row $product) { return Product::fromMoney($product->toArray()); },
                 $products
             )
         );
@@ -68,7 +68,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(array $category) { return ProductCategory::fromMoney($category); },
+            function(Row $category) { return ProductCategory::fromMoney($category->toArray()); },
             $categories
         );
     }
@@ -88,7 +88,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(array $stock) { return ProductStock::fromMoney($stock); },
+            function(Row $stock) { return ProductStock::fromMoney($stock->toArray()); },
             $stocks
         );
     }
