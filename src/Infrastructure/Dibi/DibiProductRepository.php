@@ -6,6 +6,7 @@ namespace Clovnrian\MoneyBridge\Infrastructure\Dibi;
 use Clovnrian\MoneyBridge\Domain\Product\Product;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCategory;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCollection;
+use Clovnrian\MoneyBridge\Domain\Product\ProductPrice;
 use Clovnrian\MoneyBridge\Domain\Product\ProductRepository;
 use Clovnrian\MoneyBridge\Domain\Product\ProductStock;
 use Dibi\Connection;
@@ -46,7 +47,7 @@ final class DibiProductRepository implements ProductRepository
 
         return new ProductCollection(
             ...array_map(
-                function(Row $product) { return Product::fromMoney($product->toArray()); },
+                function(Row $row) { return Product::fromMoney($row->toArray()); },
                 $products
             )
         );
@@ -68,7 +69,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $category) { return ProductCategory::fromMoney($category->toArray()); },
+            function(Row $row) { return ProductCategory::fromMoney($row->toArray()); },
             $categories
         );
     }
@@ -88,8 +89,39 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $stock) { return ProductStock::fromMoney($stock->toArray()); },
+            function(Row $row) { return ProductStock::fromMoney($row->toArray()); },
             $stocks
+        );
+    }
+
+    /**
+     * @return ProductPrice[]
+     */
+    public function findPricesForProduct(string $productId): array
+    {
+        $prices = $this->db->select('
+                CAST(pc.ID AS char(36)) ID,
+                pc.Cena,
+                pc.SazbaDPH,
+                m.Kod KodMeny,
+                CAST(c.PlatnostDo AS char(50)) PlatnostDo,
+                CAST(c.PlatnostOd AS char(50)) PlatnostOd,
+                CAST(oc.Cenik_ID AS char(36)) Cenik_ID,
+                c.Nazev,
+                c.Kod
+		    ')
+            ->from('CSW_EObchod_ObchodCenik oc')
+            ->join('Ceniky_Cenik c')->on('c.ID = oc.Cenik_ID')
+            ->join('CSW_EObchod_PolozkaCeniku pc')->on('pc.Cenik_ID = oc.Cenik_ID')
+            ->join('CSW_EObchod_Mena m')->on('m.ID = c.Mena_ID')
+            ->where('pc.Artikl_ID = %s', $productId)
+            ->where('c.Neaktivni = 0')
+            ->orderBy('pc.Cena ASC')
+            ->fetchAll();
+
+        return array_map(
+            function(Row $row) { return ProductPrice::fromMoney($row->toArray()); },
+            $prices
         );
     }
 }

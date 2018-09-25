@@ -26,12 +26,6 @@ final class Product
     /** @var ProductVendor|null */
     private $vendor;
 
-    /** @var float|null */
-    private $price;
-
-    /** @var int|null */
-    private $vat;
-
     /** @var \DateTimeInterface */
     private $created;
 
@@ -49,6 +43,9 @@ final class Product
 
     /** @var ProductParameter[] */
     private $parameters;
+
+    /** @var ProductPrice[] */
+    private $prices;
 
     public static function fromMoney(array $data): self
     {
@@ -79,12 +76,11 @@ final class Product
         string $plu= null,
         string $ean= null,
         string $catalogNumber= null,
-        float $price= null,
-        int $vat = null,
         array $stocks = [],
         array $images = [],
         array $categories = [],
-        array $parameters = []
+        array $parameters = [],
+        array $prices = []
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -93,14 +89,13 @@ final class Product
         $this->ean = $ean;
         $this->catalogNumber = $catalogNumber;
         $this->vendor = $vendor;
-        $this->price = $price;
-        $this->vat = $vat;
         $this->created = $created;
         $this->updated = $updated;
         $this->stocks = $stocks;
         $this->images = $images;
         $this->categories = $categories;
         $this->parameters = $parameters;
+        $this->prices = $prices;
     }
 
     public function setCategories(ProductCategory ...$categories)
@@ -111,6 +106,11 @@ final class Product
     public function setStocks(ProductStock ...$stocks)
     {
         $this->stocks = $stocks;
+    }
+
+    public function setPrices(ProductPrice ...$prices)
+    {
+        $this->prices = $prices;
     }
 
     public function getId(): string

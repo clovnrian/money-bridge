@@ -16,4 +16,9 @@ interface ProductRepository
      * @return ProductStock[]
      */
     public function findStocksForProduct(string $productId): array;
+
+    /**
+     * @return ProductPrice[]
+     */
+    public function findPricesForProduct(string $productId): array;
 }

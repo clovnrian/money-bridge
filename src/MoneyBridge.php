@@ -31,6 +31,10 @@ final class MoneyBridge implements IMoneyBridge
             $product->setStocks(
                 ...$this->repository->findStocksForProduct($product->getId())
             );
+
+            $product->setPrices(
+                ...$this->repository->findPricesForProduct($product->getId())
+            );
         }
 
         return $productCollection;
