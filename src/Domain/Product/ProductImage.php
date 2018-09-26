@@ -61,7 +61,7 @@ final class ProductImage
         return $this->name;
     }
 
-    public function getSize(): string
+    public function getSize(): int
     {
         return $this->size;
     }

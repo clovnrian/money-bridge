@@ -21,5 +21,10 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.13.0",
     "phpstan/phpstan": "^0.10.3"
+  },
+  "scripts": {
+    "cs": "php-cs-fixer fix --dry-run --diff --ansi",
+    "cs-fix": "php-cs-fixer fix --ansi",
+    "stan": "phpstan analyse --ansi --no-progress -l max src"
   }
 }

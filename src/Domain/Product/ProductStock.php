@@ -29,4 +29,19 @@ final class ProductStock
         $this->name = $name;
         $this->quantity = $quantity;
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
 }

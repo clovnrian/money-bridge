@@ -44,4 +44,29 @@ final class PriceList
         $this->validFrom = $validFrom;
         $this->validTo = $validTo;
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getValidFrom(): \DateTimeInterface
+    {
+        return $this->validFrom;
+    }
+
+    public function getValidTo(): \DateTimeInterface
+    {
+        return $this->validTo;
+    }
 }

@@ -26,4 +26,9 @@ interface ProductRepository
      * @return ProductImage[]
      */
     public function findImagesForProduct(string $productId): array;
+
+    /**
+     * @return ProductParameter[]
+     */
+    public function findParametersForProduct(string $productId): array;
 }

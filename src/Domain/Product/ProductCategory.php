@@ -29,4 +29,22 @@ final class ProductCategory
         $this->name = $name;
         $this->parentCategoryId = $parentCategoryId;
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getParentCategoryId()
+    {
+        return $this->parentCategoryId;
+    }
 }

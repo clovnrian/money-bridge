@@ -26,4 +26,12 @@ final class ProductCollection implements IteratorAggregate, Countable
     {
         return \count($this->products);
     }
+
+    /**
+     * @return Product[]
+     */
+    public function toArray(): array
+    {
+        return $this->products;
+    }
 }

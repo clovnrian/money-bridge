@@ -118,8 +118,108 @@ final class Product
         $this->images = $images;
     }
 
+    public function setParameters(ProductParameter ...$parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPlu()
+    {
+        return $this->plu;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getEan()
+    {
+        return $this->ean;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCatalogNumber()
+    {
+        return $this->catalogNumber;
+    }
+
+    /**
+     * @return ProductVendor|null
+     */
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
+
+    public function getCreated(): \DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function getUpdated(): \DateTimeInterface
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @return ProductStock[]
+     */
+    public function getStocks(): array
+    {
+        return $this->stocks;
+    }
+
+    /**
+     * @return ProductImage[]
+     */
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    /**
+     * @return ProductCategory[]
+     */
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @return ProductParameter[]
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @return ProductPrice[]
+     */
+    public function getPrices(): array
+    {
+        return $this->prices;
     }
 }

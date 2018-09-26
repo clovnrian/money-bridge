@@ -42,5 +42,28 @@ final class ProductPrice
         $this->vat = $vat;
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
 
+    public function getPriceList(): PriceList
+    {
+        return $this->priceList;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function getVat(): int
+    {
+        return $this->vat;
+    }
 }

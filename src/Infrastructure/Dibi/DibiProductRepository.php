@@ -7,6 +7,7 @@ use Clovnrian\MoneyBridge\Domain\Product\Product;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCategory;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCollection;
 use Clovnrian\MoneyBridge\Domain\Product\ProductImage;
+use Clovnrian\MoneyBridge\Domain\Product\ProductParameter;
 use Clovnrian\MoneyBridge\Domain\Product\ProductPrice;
 use Clovnrian\MoneyBridge\Domain\Product\ProductRepository;
 use Clovnrian\MoneyBridge\Domain\Product\ProductStock;
@@ -142,6 +143,28 @@ final class DibiProductRepository implements ProductRepository
         return array_map(
             function(Row $row) { return ProductImage::fromMoney($row->toArray()); },
             $images
+        );
+    }
+
+    /**
+     * @return ProductParameter[]
+     */
+    public function findParametersForProduct(string $productId): array
+    {
+        $parameters = $this->db->select('
+            CAST(ap.ID AS char(36)) ID,
+            ap.TextovaHodnota Hodnota,
+            p.Nazev
+        ')
+            ->from('CSW_EObchod_ArtiklParametr ap')
+            ->join('CSW_EObchod_Parametr p')->on('p.ID = ap.Parametr_ID')
+            ->where('ap.Deleted=0 AND ap.Hidden=0')
+            ->where('ap.Root_ID = %s', $productId)
+            ->fetchAll();
+
+        return array_map(
+            function(Row $row) { return ProductParameter::fromMoney($row->toArray()); },
+            $parameters
         );
     }
 }

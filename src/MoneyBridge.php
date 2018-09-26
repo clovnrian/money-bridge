@@ -40,6 +40,10 @@ final class MoneyBridge implements IMoneyBridge
                 $product->setImages(
                     ...$this->repository->findImagesForProduct($product->getId())
                 );
+
+                $product->setParameters(
+                    ...$this->repository->findParametersForProduct($product->getId())
+                );
             } catch (\Throwable $e) {
                 continue;
             }
