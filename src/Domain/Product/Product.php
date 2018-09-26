@@ -73,9 +73,9 @@ final class Product
         \DateTimeInterface $updated,
         ProductVendor $vendor = null,
         string $description = null,
-        string $plu= null,
-        string $ean= null,
-        string $catalogNumber= null,
+        string $plu = null,
+        string $ean = null,
+        string $catalogNumber = null,
         array $stocks = [],
         array $images = [],
         array $categories = [],
@@ -134,7 +134,7 @@ final class Product
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -142,7 +142,7 @@ final class Product
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getPlu()
     {
@@ -150,7 +150,7 @@ final class Product
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getEan()
     {
@@ -158,7 +158,7 @@ final class Product
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCatalogNumber()
     {

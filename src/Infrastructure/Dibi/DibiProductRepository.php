@@ -53,7 +53,7 @@ final class DibiProductRepository implements ProductRepository
 
         return new ProductCollection(
             ...array_map(
-                function(Row $row) { return Product::fromMoney($row->toArray()); },
+                function (Row $row) { return Product::fromMoney($row->toArray()); },
                 $products
             )
         );
@@ -75,7 +75,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $row) { return ProductCategory::fromMoney($row->toArray()); },
+            function (Row $row) { return ProductCategory::fromMoney($row->toArray()); },
             $categories
         );
     }
@@ -95,7 +95,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $row) { return ProductStock::fromMoney($row->toArray()); },
+            function (Row $row) { return ProductStock::fromMoney($row->toArray()); },
             $stocks
         );
     }
@@ -126,7 +126,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $row) { return ProductPrice::fromMoney($row->toArray()); },
+            function (Row $row) { return ProductPrice::fromMoney($row->toArray()); },
             $prices
         );
     }
@@ -141,7 +141,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $row) { return ProductImage::fromMoney($row->toArray()); },
+            function (Row $row) { return ProductImage::fromMoney($row->toArray()); },
             $images
         );
     }
@@ -163,7 +163,7 @@ final class DibiProductRepository implements ProductRepository
             ->fetchAll();
 
         return array_map(
-            function(Row $row) { return ProductParameter::fromMoney($row->toArray()); },
+            function (Row $row) { return ProductParameter::fromMoney($row->toArray()); },
             $parameters
         );
     }

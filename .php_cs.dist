@@ -1,0 +1,80 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('src')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        '@Symfony:risky' => true,
+        '@DoctrineAnnotation' => true,
+        '@PHP70Migration' => true,
+        '@PHP70Migration:risky' => true,
+        'align_multiline_comment' => true,
+        'array_indentation' => true,
+        'array_syntax' => [
+            'syntax' => 'short',
+        ],
+        'blank_line_after_opening_tag' => false,
+        'blank_line_before_statement' => [
+            'statements' => ['try'],
+        ],
+        'class_attributes_separation' => [
+            'elements' => ['method', 'property'],
+        ],
+        'combine_consecutive_issets' => true,
+        'combine_consecutive_unsets' => true,
+        'compact_nullable_typehint' => true,
+        'concat_space' => [
+            'spacing' => 'one',
+        ],
+        'declare_strict_types' => true,
+        'doctrine_annotation_indentation' => [
+            'indent_mixed_lines' => true,
+        ],
+        'dir_constant' => true,
+        'ereg_to_preg' => true,
+        'escape_implicit_backslashes' => true,
+        'explicit_indirect_variable' => true,
+        'fully_qualified_strict_types' => true,
+        'linebreak_after_opening_tag' => true,
+        'method_chaining_indentation' => true,
+        'multiline_comment_opening_closing' => true,
+        'multiline_whitespace_before_semicolons' => true,
+        'no_binary_string' => true,
+        'no_homoglyph_names' => true,
+        'no_null_property_initialization' => true,
+        'no_superfluous_elseif' => true,
+        'no_superfluous_phpdoc_tags' => true,
+        'no_useless_else' => true,
+        'no_useless_return' => true,
+        'no_unreachable_default_argument_value' => true,
+        'no_unset_on_property' => true,
+        'ordered_class_elements' => [
+            'use_trait',
+            'constant',
+            'property_static',
+            'property',
+            'method_static',
+            'construct',
+        ],
+        'ordered_imports' => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_align' => [
+            'align' => 'left',
+        ],
+        'phpdoc_no_package' => false,
+        'phpdoc_order' => true,
+        'phpdoc_separation' => false,
+        'phpdoc_summary' => false,
+        'phpdoc_to_comment' => false,
+        'phpdoc_trim_consecutive_blank_line_separation' => true,
+        'phpdoc_types_order' => [
+            'null_adjustment' => 'always_last',
+            'sort_algorithm' => 'none',
+        ],
+        'return_assignment' => true,
+    ])
+    ->setFinder($finder);

@@ -41,7 +41,7 @@ final class ProductCategory
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getParentCategoryId()
     {

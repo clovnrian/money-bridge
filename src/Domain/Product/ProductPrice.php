@@ -28,8 +28,8 @@ final class ProductPrice
             $data['ID'],
             PriceList::fromMoney($data),
             $data['KodMeny'],
-            floatval($data['Cena']),
-            intval($data['SazbaDPH'])
+            (float) ($data['Cena']),
+            (int) ($data['SazbaDPH'])
         );
     }
 
