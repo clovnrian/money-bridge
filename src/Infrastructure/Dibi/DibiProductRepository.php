@@ -6,6 +6,7 @@ namespace Clovnrian\MoneyBridge\Infrastructure\Dibi;
 use Clovnrian\MoneyBridge\Domain\Product\Product;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCategory;
 use Clovnrian\MoneyBridge\Domain\Product\ProductCollection;
+use Clovnrian\MoneyBridge\Domain\Product\ProductImage;
 use Clovnrian\MoneyBridge\Domain\Product\ProductPrice;
 use Clovnrian\MoneyBridge\Domain\Product\ProductRepository;
 use Clovnrian\MoneyBridge\Domain\Product\ProductStock;
@@ -17,9 +18,13 @@ final class DibiProductRepository implements ProductRepository
     /** @var Connection */
     private $db;
 
-    public function __construct(Connection $db)
+    /** @var Connection */
+    private $documentDb;
+
+    public function __construct(Connection $db, Connection $documentDb)
     {
         $this->db = $db;
+        $this->documentDb = $documentDb;
     }
 
     public function find(int $limit, int $offset): ProductCollection
@@ -122,6 +127,21 @@ final class DibiProductRepository implements ProductRepository
         return array_map(
             function(Row $row) { return ProductPrice::fromMoney($row->toArray()); },
             $prices
+        );
+    }
+
+    public function findImagesForProduct(string $productId): array
+    {
+        $images = $this->documentDb->select(
+            'CAST(ID AS char(36)) ID, Description, Create_Date, Size, FileImage, IconImage'
+        )
+            ->from('System_Attachment')
+            ->where('Object_Name=%s AND Object_ID=%s AND Deleted=0', 'Artikl', $productId)
+            ->fetchAll();
+
+        return array_map(
+            function(Row $row) { return ProductImage::fromMoney($row->toArray()); },
+            $images
         );
     }
 }

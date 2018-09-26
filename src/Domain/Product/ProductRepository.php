@@ -21,4 +21,9 @@ interface ProductRepository
      * @return ProductPrice[]
      */
     public function findPricesForProduct(string $productId): array;
+
+    /**
+     * @return ProductImage[]
+     */
+    public function findImagesForProduct(string $productId): array;
 }

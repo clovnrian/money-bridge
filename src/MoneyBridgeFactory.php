@@ -15,7 +15,7 @@ final class MoneyBridgeFactory
 			throw new \InvalidArgumentException('Configuration must be array.');
 		}
 
-        $connection = new Connection([
+        $dataConnection = new Connection([
             'driver'   => 'sqlsrv',
             'host'     => $config['host'],
             'username' => $config['username'],
@@ -24,7 +24,16 @@ final class MoneyBridgeFactory
             'version'  => '11.0',
         ]);
 
-        $repository = new DibiProductRepository($connection);
+        $docConnection = new Connection([
+            'driver'   => 'sqlsrv',
+            'host'     => $config['host'],
+            'username' => $config['username'],
+            'password' => $config['password'],
+            'database' => $config['database'] . '_Doc',
+            'version'  => '11.0',
+        ]);
+
+        $repository = new DibiProductRepository($dataConnection, $docConnection);
         return new MoneyBridge($repository);
     }
 }

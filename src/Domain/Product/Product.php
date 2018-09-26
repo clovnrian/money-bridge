@@ -113,6 +113,11 @@ final class Product
         $this->prices = $prices;
     }
 
+    public function setImages(ProductImage ...$images)
+    {
+        $this->images = $images;
+    }
+
     public function getId(): string
     {
         return $this->id;

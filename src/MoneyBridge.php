@@ -24,17 +24,25 @@ final class MoneyBridge implements IMoneyBridge
 
         /** @var Product $product */
         foreach ($productCollection->getIterator() as $product) {
-            $product->setCategories(
-                ...$this->repository->findCategoriesForProduct($product->getId())
-            );
+            try {
+                $product->setCategories(
+                    ...$this->repository->findCategoriesForProduct($product->getId())
+                );
 
-            $product->setStocks(
-                ...$this->repository->findStocksForProduct($product->getId())
-            );
+                $product->setStocks(
+                    ...$this->repository->findStocksForProduct($product->getId())
+                );
 
-            $product->setPrices(
-                ...$this->repository->findPricesForProduct($product->getId())
-            );
+                $product->setPrices(
+                    ...$this->repository->findPricesForProduct($product->getId())
+                );
+
+                $product->setImages(
+                    ...$this->repository->findImagesForProduct($product->getId())
+                );
+            } catch (\Throwable $e) {
+                continue;
+            }
         }
 
         return $productCollection;
